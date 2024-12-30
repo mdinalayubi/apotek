@@ -1,8 +1,11 @@
-|  | |
-| ----------- | ----------- |
-| <b> Nama     | Muhammad Din Al Ayubi       |
- # Login
+|          |                       |
+| -------- | --------------------- |
+| <b> Nama | Muhammad Din Al Ayubi |
+
+# Login
+
 ![img](img/login.png)
+
 ```java
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -246,19 +249,19 @@ private void printReceiptActionPerformed() {
             JOptionPane.showMessageDialog(this, "Keranjang belanja kosong.");
         }
     }
-    
+
     private void updateProductStockInDatabase() {
         try (Connection conn = DatabaseConnection.connect()) {
             String query = "UPDATE medicines SET stock = ? WHERE medicine_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-    
+
             for (int i = 0; i < productTableModel.getRowCount(); i++) {
                 int productId = (Integer) productTableModel.getValueAt(i, 0);
                 int stock = (Integer) productTableModel.getValueAt(i, 3);
-    
+
                 pstmt.setInt(1, stock);
                 pstmt.setInt(2, productId);
-    
+
                 pstmt.addBatch();
             }
             pstmt.executeBatch();
@@ -276,7 +279,7 @@ private void printReceiptActionPerformed() {
         totalLabel.setText("Total: " + formatter.format(total));
     }
 
-    
+
     private void saveTransactionToDatabase() {
         try (Connection conn = DatabaseConnection.connect()) {
             String query = "INSERT INTO sales_report (sale_date, product_name, quantity, price, total) VALUES (?, ?, ?, ?, ?)";
@@ -309,12 +312,12 @@ private void printReceiptActionPerformed() {
 
     class BackgroundPanel extends JPanel {
         private Image backgroundImage;
-    
+
         public BackgroundPanel(String imagePath) {
             // Load gambar sebagai background
             backgroundImage = new ImageIcon(imagePath).getImage();
         }
-    
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
@@ -332,8 +335,11 @@ private void printReceiptActionPerformed() {
 }
 
 ```
+
 # Dashboard
+
 ![img](img/Dashboard.png)
+
 ```java
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -533,8 +539,11 @@ class BackgroundPanel extends JPanel {
 }
 
 ```
+
 # Manajemen Obat
-![img](img/Manajemen%20obat.png)
+
+![img](img/Manajemen_obat.png)
+
 ```java
 package config;
 
@@ -548,13 +557,13 @@ package config;
  import java.sql.Statement;
  import java.sql.ResultSet;
  import javax.swing.JOptionPane;
- 
+
  public class DatabaseConnection {
-     
+
      private static final String URL = "jdbc:mysql://localhost:3306/pharmacy"; // Ubah dengan nama database kamu
      private static final String USER = "root"; // Ganti dengan username database
      private static final String PASSWORD = ""; // Ganti dengan password database kamu
- 
+
      public static Connection connect() throws Exception {
          try {
              // Load JDBC driver
@@ -565,14 +574,14 @@ package config;
              throw new Exception("Koneksi Gagal: " + e.getMessage());
          }
      }
- 
+
      public static void main(String[] args) {
          try (Connection conn = connect()) {
              JOptionPane.showMessageDialog(null, "Koneksi berhasil!");
              Statement stmt = conn.createStatement();
              String query = "SELECT * FROM medicines"; // Contoh query untuk mengambil data obat
              ResultSet rs = stmt.executeQuery(query);
- 
+
              while (rs.next()) {
                  System.out.println("ID Obat: " + rs.getInt("medicine_id"));
                  System.out.println("Nama Obat: " + rs.getString("name"));
@@ -584,11 +593,14 @@ package config;
          }
      }
  }
- 
+
 
 ```
+
 # Manajemen Pengguna
-![img](img/manjemen%20pengguna.png)
+
+![img](img/manjemen_pengguna.png)
+
 ```java
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -653,7 +665,7 @@ public class UserManagementForm extends javax.swing.JFrame {
         // Set layout utama
         backgroundPanel.setLayout(new BorderLayout(10, 10));
         setContentPane(backgroundPanel);
-        
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Manajemen Pengguna");
 
@@ -782,7 +794,7 @@ public class UserManagementForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Pilih baris untuk dihapus.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
+
     class BackgroundPanel extends JPanel {
     private Image backgroundImage;
 
@@ -811,8 +823,11 @@ public class UserManagementForm extends javax.swing.JFrame {
 }
 
 ```
+
 # Laporan Penjualan
-![img](img/laporan%20penjualan.png)
+
+![img](img/laporan_penjualan.png)
+
 ```java
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -833,7 +848,7 @@ import javax.swing.JPanel;
 
 /**
  * Laporan Penjualan
- * 
+ *
  * @author mdina
  */
 public class SalesReportForm extends javax.swing.JFrame {
@@ -853,7 +868,7 @@ public class SalesReportForm extends javax.swing.JFrame {
         // Set layout utama
         backgroundPanel.setLayout(new BorderLayout(10, 10));
         setContentPane(backgroundPanel);
-   
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Laporan Penjualan");
 
@@ -1085,8 +1100,11 @@ public class SalesReportForm extends javax.swing.JFrame {
 }
 
 ```
+
 # Kasir
+
 ![img](img/kasir.png)
+
 ```java
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -1330,19 +1348,19 @@ private void printReceiptActionPerformed() {
             JOptionPane.showMessageDialog(this, "Keranjang belanja kosong.");
         }
     }
-    
+
     private void updateProductStockInDatabase() {
         try (Connection conn = DatabaseConnection.connect()) {
             String query = "UPDATE medicines SET stock = ? WHERE medicine_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(query);
-    
+
             for (int i = 0; i < productTableModel.getRowCount(); i++) {
                 int productId = (Integer) productTableModel.getValueAt(i, 0);
                 int stock = (Integer) productTableModel.getValueAt(i, 3);
-    
+
                 pstmt.setInt(1, stock);
                 pstmt.setInt(2, productId);
-    
+
                 pstmt.addBatch();
             }
             pstmt.executeBatch();
@@ -1360,7 +1378,7 @@ private void printReceiptActionPerformed() {
         totalLabel.setText("Total: " + formatter.format(total));
     }
 
-    
+
     private void saveTransactionToDatabase() {
         try (Connection conn = DatabaseConnection.connect()) {
             String query = "INSERT INTO sales_report (sale_date, product_name, quantity, price, total) VALUES (?, ?, ?, ?, ?)";
@@ -1393,12 +1411,12 @@ private void printReceiptActionPerformed() {
 
     class BackgroundPanel extends JPanel {
         private Image backgroundImage;
-    
+
         public BackgroundPanel(String imagePath) {
             // Load gambar sebagai background
             backgroundImage = new ImageIcon(imagePath).getImage();
         }
-    
+
         @Override
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
